@@ -135,6 +135,10 @@ def build_model(hp):
         else:
             model.add(tf.keras.layers.Dense(PREVIOUS_STEPS, activation=hp_activation, kernel_initializer=initializer))
             break
+    
+    # in case the last layer has less than PREVIOUS_STEPS dimensions
+    if decoder_layer_dimensions[-1] < PREVIOUS_STEPS:
+        model.add(tf.keras.layers.Dense(PREVIOUS_STEPS, activation=hp_activation, kernel_initializer=initializer))
       
            
     
